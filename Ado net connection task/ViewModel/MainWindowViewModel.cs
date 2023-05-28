@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -53,23 +54,39 @@ namespace Ado_net_connection_task.ViewModel
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnection"].ConnectionString;
                 conn.Open();
 
-                
-                var query = "SELECT * FROM Authors";
+                List<Author> author = new List<Author>();
 
                 SqlDataReader reader = null;
 
-                using (var command = new SqlCommand(query, conn))
+                var id = new SqlParameter();
+                id.SqlDbType = SqlDbType.Int;
+                id.ParameterName = "@id";
+
+                var firstname = new SqlParameter();
+                firstname.SqlDbType = SqlDbType.NVarChar;
+                firstname.ParameterName = "@firstname";
+
+                var lastname = new SqlParameter();
+                lastname.SqlDbType = SqlDbType.NVarChar;
+                lastname.ParameterName = "@lastname";
+
+
+                using (var command = new SqlCommand("sp_TakeById", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        for (int i = 0; i < reader.FieldCount; i++)
-                        {
+                        command.Parameters.Add(id);
+                        command.Parameters.Add(firstname);
+                        command.Parameters.Add(lastname);
 
-                        }
+
                     }
+
                 }
+
             }
         }
     }
