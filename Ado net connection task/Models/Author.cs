@@ -9,7 +9,12 @@ namespace Ado_net_connection_task.Models
     public class Author
     {
         public int Id { get; set; }
-        public string FiestName { get; set; }
-        public string MyProperty { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Id} - {FirstName} - {LastName}";
+        }
     }
 }

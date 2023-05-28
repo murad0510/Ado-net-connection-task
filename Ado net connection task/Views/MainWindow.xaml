@@ -40,7 +40,13 @@
                 </Button.Resources>
             </Button>
 
-            <ListBox Width="510" Height="200" Canvas.Right="0" ItemsSource="{Binding ListAuthors}" Canvas.Bottom="20"></ListBox>
+            <ListBox Width="510" FontSize="20" Height="200" Canvas.Right="0" SelectedItem="{Binding SelectedItem}" SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding ListAuthors}" Canvas.Bottom="20">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChanged}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListBox>
 
         </Canvas>
 
