@@ -59,7 +59,7 @@ namespace Ado_net_connection_task.ViewModel
                 SqlDataReader reader = null;
 
                 var id = new SqlParameter();
-                id.SqlDbType = SqlDbType.Int;
+                id.SqlDbType = SqlDbType.Int OUT;
                 id.ParameterName = "@id";
 
                 var firstname = new SqlParameter();
