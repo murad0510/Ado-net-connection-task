@@ -123,13 +123,16 @@ namespace Ado_net_connection_task.ViewModel
                             var id = new SqlParameter();
                             id.ParameterName = "@id";
                             id.SqlDbType = SqlDbType.Int;
-                            id.Value = SelectedIndex;
+                            id.Value = authors[selectedIndex].Id - 1;
 
                             command.Parameters.Add(id);
 
                             var result = command.ExecuteNonQuery();
                             MessageBox.Show($"Deleted successfully.");
                         }
+
+                        Connection(authors);
+
                     }
                 }
             });
